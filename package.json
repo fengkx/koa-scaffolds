@@ -33,7 +33,8 @@
     "winston": "^3.2.1"
   },
   "xo": {
-    "space": true
+    "space": true,
+    "prettier": true
   },
   "devDependencies": {
     "ava": "^1.3.1",
