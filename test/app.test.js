@@ -1,23 +1,28 @@
-const supertest = require('supertest');
-const {server}= require('../app');
 const test = require('ava');
+const supertest = require('supertest');
+const { server } = require('../app');
+
 const request = supertest(server);
 
 test('index', async (t) => {
-    t.plan(3);
+    t.plan(2);
     const res = await request.get('/');
     t.is(res.status, 200);
     t.is(res.headers['content-type'], 'text/html; charset=utf-8');
-    t.is(res.text, 'Hello index');
-})
+});
+
+test('css', async (t) => {
+    t.plan(2);
+    const res = await request.get('/css/style.css');
+    t.is(res.status, 200);
+    t.is(res.headers['content-type'], 'text/css; charset=utf-8');
+});
 
 test('post json', async (t) => {
     t.plan(3);
-    const obj = {message: 'Hello json', status: 'ok'};
-    const res = await request
-        .post('/json')
-        .send(obj);
+    const obj = { message: 'Hello json', status: 'ok' };
+    const res = await request.post('/json').send(obj);
     t.is(res.status, 200);
     t.is(res.headers['content-type'], 'application/json; charset=utf-8');
     t.deepEqual(res.body, obj);
-})
+});

@@ -7,6 +7,7 @@ const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 const session = require('koa-session');
+const views = require('koa-views');
 const config = require('./config');
 const logger = require('./utils/logger');
 const router = require('./router');
@@ -20,7 +21,10 @@ app.use(
         enableTypes: ['json', 'form', 'text']
     })
 );
+app.use(views(path.join(__dirname, 'views'), { map: { html: 'nunjucks' } }));
 app.use(json());
+app.use(require('./middlewares/scss-middleware'));
+
 if (process.env.NODE_ENV !== 'production') {
     app.use(koaLogger());
 }
