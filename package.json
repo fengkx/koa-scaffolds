@@ -37,7 +37,7 @@
     "prettier": true
   },
   "devDependencies": {
-    "ava": "^3.3.0",
+    "ava": "^5.1.1",
     "prettier": "^2.0.4",
     "supertest": "^6.0.0",
     "xo": "^0.41.0"
